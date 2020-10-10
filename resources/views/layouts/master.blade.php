@@ -19,7 +19,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
+
 
     <!-- Main content -->
     <section class="content">
@@ -27,35 +27,35 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pull-right">
-            
+
           </div>
         </div>
       </div>
 
-      
+
       @yield('content')
 
       <!-- modal hapus -->
  <div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
       <div class="modal-dialog modal-default modal-dialog-centered modal-" role="document">
         <div class="modal-content bg-gradient-danger">
- 
+
           <div class="modal-header">
             <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
- 
+
           <div class="modal-body">
- 
+
             <div class="py-3 text-center">
               <i class="ni ni-bell-55 ni-3x"></i>
               <h4 class="heading mt-4">Apakah kamu yakin ingin menghapus data ini?</h4>
             </div>
- 
+
           </div>
- 
+
           <div class="modal-footer">
             <form action="" method="post">
               {{ csrf_field() }}
@@ -66,7 +66,7 @@
               </p>
             </form>
           </div>
- 
+
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
               <h4 class="modal-title" id="myModalLabel">Password Sync Ulang</h4>
             </div>
             <div class="modal-body">
-              
+
               <form role="form" method="post" action="{{ url('sync-ulang') }}">
               {{ csrf_field() }}
                 <div class="box-body">
@@ -117,15 +117,10 @@
     <div class="pull-right hidden-xs">
       <!-- <b>(021)</b>7398615 -->
     </div>
-    <strong>
-      informasi teknis : <br>
-      Imani <br>
-      Telp: (021)222222      e-mail: imani@imani.com
-    </strong>
   </footer>
 
   <!-- Control Sidebar -->
-  
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
@@ -147,6 +142,6 @@
 } );
 </script>
 
-@yield('scripts')
+
 </body>
 </html>

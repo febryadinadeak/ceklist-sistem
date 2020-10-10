@@ -31,8 +31,8 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::delete('office-boy/{id}','OfficeBoy_Controller@delete');
 
 	//manage data tugas
-	Route::get('tugas','Tugas_Controller@index');
-	Route::get('tugas/add','Tugas_Controller@add');  
+	Route::get('tugas','Tugas_Controller@index')->name('tugas.index');
+	Route::get('tugas/add','Tugas_Controller@add');
 	Route::post('tugas/add','Tugas_Controller@store');
 	Route::get('tugas/{id}','Tugas_Controller@edit');
 	Route::put('tugas/{id}','Tugas_Controller@update');
@@ -40,9 +40,15 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::get('admin','Tugas_Controller@index');
 	Route::post('tugas/selesai', 'Tugas_Controller@selesai')->name('tugas.selesai');
 
-	//manage data verifikasi laporan
+	//manage data verifikasi
 	Route::get('verifikasi','Verifikasi_Controller@index');
+	Route::get('verifikasi/pdf/{id}','Verifikasi_Controller@pdf');
 
+	//manage menu pesan
+	Route::get('pesan','Pesan_Controller@index');
+	Route::post('pesan','Pesan_Controller@update');
+
+	//manage menu jadwal
 });
 
 Auth::routes();

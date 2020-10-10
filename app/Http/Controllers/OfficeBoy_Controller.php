@@ -10,7 +10,7 @@ class OfficeBoy_Controller extends Controller
 {
     public function index(){
         $title = 'Master OfficeBoy';
-        $data = User::whereNull('role')->get();
+        $data = User::where('role',0)->get();
 
         return view('office-boy.index',compact ('title','data'));
     }
@@ -31,12 +31,13 @@ class OfficeBoy_Controller extends Controller
 
         $data['email'] = $request->email;
         $data['name'] = $request->name;
+        $data['role'] = '0';
         $data['password'] = bcrypt('123');
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
- 
+
         User::insert($data);
- 
+
         return redirect('office-boy');
     }
 
@@ -58,9 +59,9 @@ class OfficeBoy_Controller extends Controller
         //$data['password'] = bcrypt('123');
         //$data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
- 
+
         User::where('id', $id)->update($data);
- 
+
         return redirect('office-boy');
     }
 

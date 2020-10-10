@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tugas extends Model
 {
-    protected $table = 'tugas';
-    public $timestamps = false;
+    protected $guarded = [];
+
+    public function taskdone()
+    {
+        return $this->hasOne(TugasSelesai::class, 'id_tugas', 'id');
+    }
 }

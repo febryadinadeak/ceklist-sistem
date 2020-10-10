@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableTugas extends Migration
+class CreateTugasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,10 @@ class CreateTableTugas extends Migration
     {
         if (!Schema::hasTable('tugas')){
         Schema::create('tugas', function (Blueprint $table) {
-            $table->string('id',30);
+            $table->increments('id');
             $table->string('nama_tugas',115);
-
-            $table->primary('id');
-            $table->engine = 'InnoDB';
+            $table->boolean('status');
+            $table->timestamps();
         });
     }
 }
@@ -31,8 +30,6 @@ class CreateTableTugas extends Migration
      */
     public function down()
     {
-        Schema::table('tugas', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tugas');
     }
 }

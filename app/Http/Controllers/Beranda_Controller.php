@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class Beranda_Controller extends Controller
 {
     public function index(){
-    	$title = 'Beranda Admin';
+    	$title = 'Beranda Aplikasi';
 
     	return view ('beranda.index', compact('title'));
     }

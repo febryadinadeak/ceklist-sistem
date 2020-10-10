@@ -33,19 +33,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 <script src="{{ asset('js/sweetalert.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/datatables.buttons.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/buttons.flash.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/jszip.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/pdfmake.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/vfs_fonts.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/buttons.html5.min.js') }}"></script>
- 
+
 <script type="text/javascript" src="{{ asset('js/buttons.print.min.js') }}"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -55,11 +55,11 @@
 
 <!-- <script src="https://datatables.yajrabox.com/js/handlebars.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.3.1/handlebars.js"></script>
-
+@yield('scripts')
 <script type="text/javascript">
   $(document).ready(function(){
     $(".preloader").fadeOut();
-  })  
+  })
 </script>
 
 <script>
@@ -144,7 +144,7 @@
             var pesan = "{{ Session::get('sukses') }}"
             swal("Sukses", pesan, "success");
         }
- 
+
         var gagal = "{{ Session::has('gagal') }}";
         if(gagal){
             var pesan = "{{ Session::get('gagal') }}"

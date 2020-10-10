@@ -39,7 +39,7 @@
     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Username">
+        <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
         @if ($errors->has('email'))
             <span class="help-block">
                 <strong>{{ $errors->first('email') }}</strong>

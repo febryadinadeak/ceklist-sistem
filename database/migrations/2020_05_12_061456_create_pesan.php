@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableVerifikasi extends Migration
+class CreatePesan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateTableVerifikasi extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('verifikasi')){
-        Schema::create('verifikasi', function (Blueprint $table) {
-            $table->string('id',30);
-            $table->string('tanggal_betugas',115);
+        Schema::create('pesan', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('pesan');
+            $table->timestamps();
 
-            $table->primary('id');
             $table->engine = 'InnoDB';
         });
     }
-}
 
     /**
      * Reverse the migrations.
@@ -31,8 +29,8 @@ class CreateTableVerifikasi extends Migration
      */
     public function down()
     {
-        Schema::table('verifikasi', function (Blueprint $table) {
-            
+        Schema::table('pesan', function (Blueprint $table) {
+            //
         });
     }
 }

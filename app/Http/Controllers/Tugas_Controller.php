@@ -2,82 +2,94 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TugasSelesai;
+use App\Models\Verifikasi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Tugas;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Tugas_Controller extends Controller
 {
-    public function index (){
+    public function index()
+    {
         $title = 'Data Tugas';
-        $data  = Tugas::get();
 
-        //if else pertama
-        if(\Auth::user()->role==1){
-            return view ('admin.index', compact ('title','data'));
-            }else{
-            return view ('tugas.index' ,compact('title','data'));
-            }
-
-        if(\Auth::user()->role ==1){
-            $data = Tugas::where('status',true)->get();
-            return view('admin.index', compact ('title','data'));
-        }
-        else{
-            $data = Tugas::where('status',false)->get();
-            return view('tugas.index',compact ('title', 'data'));
+        if (\Auth::user()->role == 1) {
+            $data  = Tugas::get();
+            return view('admin.index', compact('title', 'data'));
+        } else {
+            $datas = Tugas::where('status', false)->get();
+            return view('tugas.index', compact(['title', 'datas']));
         }
 
-        return view ('admin.index' , compact ('title' , 'data'));
     }
 
-    public function add(){
+    public function add()
+    {
         $title = 'Tambah Data Tugas';
-
-        return view('tugas.add' , compact('title'));
+        return view('tugas.add', compact('title'));
     }
 
-    public function store(Request $request){
-        $this->validate($request,[
-            'nama_tugas'=> 'required'
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'nama_tugas' => 'required'
         ]);
 
         $data['nama_tugas'] = $request->nama_tugas;
+        $data['status']='0';
 
-        \Session::flash('sukses' , 'Data Berhasil Ditambah');
+        \Session::flash('sukses', 'Data Berhasil Ditambah');
 
         Tugas::insert($data);
 
-        return redirect ('tugas');
+        return redirect('tugas');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $dt = Tugas::find($id);
         $title = "Edit Nama Tugas $dt->nama_tugas";
-
-        return view ('tugas.edit', compact ('title', 'dt'));
+        return view('tugas.edit', compact('title', 'dt'));
     }
 
-    public function update(Request $request,$id){
-        $this->validate($request,[
-            'nama_tugas'=> 'required'
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama_tugas' => 'required'
         ]);
 
         $data['nama_tugas'] = $request->nama_tugas;
 
-        Tugas::where('id',$id)->update($data);
-        \Session::flash('sukses' , 'Data Berhasil Diupdate');
+        Tugas::where('id', $id)->update($data);
+        \Session::flash('sukses', 'Data Berhasil Diupdate');
 
         return redirect('tugas');
     }
 
-    public function delete($id){
-        Tugas::where('id',$id)->delete();
-        \Session::flash('sukses' , 'Data Berhasil Dihapus');
+    public function delete($id)
+    {
+        Tugas::where('id', $id)->delete();
+        \Session::flash('sukses', 'Data Berhasil Dihapus');
 
         return redirect('tugas');
     }
 
-    public function selesai(){
-        Tugas::update();
+    public function selesai(Request $request)
+    {
+        $arr_input = explode(',', $request->input_checkbox);
+        $unique = array_unique($arr_input);
+        $diffkeys = array_diff_key($arr_input, $unique);
+        $duplicates = array_unique($diffkeys);
+        $arr_result = array_diff($arr_input, $duplicates);
+
+        foreach ($arr_result as $value){
+            TugasSelesai::create(['id_tugas' => $value]);
+        }
+        Verifikasi::create();
+
+        return redirect()->route('tugas.index');
     }
 }
